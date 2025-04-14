@@ -21,7 +21,7 @@ llm_with_tools = llm
 
 def assistant_node(state: State):
     """Handles user requests regarding stored feedback data."""
-    logging.info("Assistant is processing user query.")
+    logging.info("Assistant is processing user queryy.")
     user_message = state.messages[-1].content
     
     # Check if the user requested a summary
