@@ -4136,6 +4136,18 @@ def sentiment_analysis_node(state: State):
     sentiment = llm_with_tools.invoke([message]).content.strip()
     logging.info(f"Sentiment analyzed as: {sentiment}")
     return {"sentiment": sentiment}
+    
+def sentiment_analysis_pointer(state: State):
+    ''' Analyze the sentiment of the feedback: Positive, Negative, or Neutral '''
+    logging.info("Analyzing the sentiment of the feedback")
+    prompt = PromptTemplate(
+        input_variables=["feedback"],
+        template="Analyze the sentiment of the following customer feedback. Respond with only one word: Positive, Negative, or Neutral.\n\nFeedback: {feedback}\n\nSentiment:"
+    )
+    message = HumanMessage(content=prompt.format(feedback=state.feedback))
+    sentiment = llm_with_tools.invoke([message]).content.strip()
+    logging.info(f"Sentiment analyzed as: {sentiment}")
+    return {"sentiment": sentiment}
 
 def priority_assignment_node(state: State):
     ''' Assign priority based on category and sentiment: High, Medium, or Low '''
